@@ -21,6 +21,9 @@
 #   v1.1 07/10/2020, Fire-Head:
 #     - Troquei o IF pelo CASE.
 #     - Adicionei o basename.
+#   v1.2 07/10/2020, Fire-Head:
+#     - Adicionei -m.
+#     - Adicionei 2 flags.
 # ------------------------------------------------------------------------ #
 # Testado em:
 #   bash 5.0.18(1).
@@ -33,16 +36,22 @@ MENSAGEM_USO="
     -h - Menu de ajuda
     -v - Versão
     -s - Ordenar a saída
+    -m - Coloca em maiúsculo
   "
 
-VERSAO="v1.1"
+VERSAO="v1.2"
+CHAVE_ORDENA=0
+CHAVE_MAIUSCULO=0
 # ------------------------------------------------------------------------ #
 # ------------------------------- EXECUÇÃO ------------------------------- #
 case "$1" in
-  -h) echo "$MENSAGEM_USO"    && exit 0 ;;
-  -v) echo "$VERSAO"          && exit 0 ;;
-  -s) echo "$USUARIOS" | sort && exit 0 ;;
-   *) echo "$USUARIOS"                  ;;
+  -h) echo "$MENSAGEM_USO" && exit 0 ;;
+  -v) echo "$VERSAO"       && exit 0 ;;
+  -s) CHAVE_ORDENA=1                 ;;
+  -m) CHAVE_MAIUSCULO=1              ;;
+   *) echo "$USUARIOS"               ;;
 esac
 
+[ $CHAVE_ORDENA -eq 1 ]    && echo "$USUARIOS" | sort
+[ $CHAVE_MAIUSCULO -eq 1 ] && echo "$USUARIOS" | tr [a-z] [A-Z]
 # ------------------------------------------------------------------------ #
