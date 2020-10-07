@@ -24,6 +24,9 @@
 #   v1.2 07/10/2020, Fire-Head:
 #     - Adicionei -m.
 #     - Adicionei 2 flags.
+#   v1.3 07/10/2020, Fire-Head:
+#     - Adicionei while com shift e teste de variável.
+#     - Adicionado 2 flags.
 # ------------------------------------------------------------------------ #
 # Testado em:
 #   bash 5.0.18(1).
@@ -39,19 +42,25 @@ MENSAGEM_USO="
     -m - Coloca em maiúsculo
   "
 
-VERSAO="v1.2"
+VERSAO="v1.3"
 CHAVE_ORDENA=0
 CHAVE_MAIUSCULO=0
 # ------------------------------------------------------------------------ #
 # ------------------------------- EXECUÇÃO ------------------------------- #
-case "$1" in
-  -h) echo "$MENSAGEM_USO" && exit 0 ;;
-  -v) echo "$VERSAO"       && exit 0 ;;
-  -s) CHAVE_ORDENA=1                 ;;
-  -m) CHAVE_MAIUSCULO=1              ;;
-   *) echo "$USUARIOS"               ;;
-esac
+while test -n "$1"
+do
+  case "$1" in
+    -h) echo "$MENSAGEM_USO"              && exit 0 ;;
+    -v) echo "$VERSAO"                    && exit 0 ;;
+    -s) CHAVE_ORDENA=1                              ;;
+    -m) CHAVE_MAIUSCULO=1                           ;;
+     *) echo "Opção inválida, veja o -h." && exit 1 ;;
+  esac
+  shift
+done
 
-[ $CHAVE_ORDENA -eq 1 ]    && echo "$USUARIOS" | sort
-[ $CHAVE_MAIUSCULO -eq 1 ] && echo "$USUARIOS" | tr [a-z] [A-Z]
+[ $CHAVE_ORDENA -eq 1 ]    && USUARIOS=$(echo "$USUARIOS" | sort)
+[ $CHAVE_MAIUSCULO -eq 1 ] && USUARIOS=$(echo "$USUARIOS" | tr [a-z] [A-Z])
+
+echo "$USUARIOS"
 # ------------------------------------------------------------------------ #
