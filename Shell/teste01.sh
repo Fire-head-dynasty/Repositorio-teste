@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# listaUsuarios.sh - Extrai usuários do /etc/passwd
+# teste01.sh - Extrai usuários do /etc/passwd
 #
 # Site:       https://seusite.com.br
 # Autor:      Fire-Head.
@@ -11,7 +11,7 @@
 # em maiúsculo e em ordem alfabética.
 #
 # Exemplos:
-#       $ ./listaUsuarios.sh -s -m
+#       $ ./teste01.sh -s -m
 #       Neste exemplo ficará em ordem alfabética e em maiúsculo.
 # ------------------------------------------------------------------------ #
 # Histórico:
